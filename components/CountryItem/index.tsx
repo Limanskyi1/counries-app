@@ -37,3 +37,5 @@ export const CountryItem: FC<Props> = memo(
     );
   }
 );
+
+CountryItem.displayName = "CountryItem";
