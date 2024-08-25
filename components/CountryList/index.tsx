@@ -1,16 +1,17 @@
 
-import { ICountryItem } from "@/types";
+"use client"
 import { CountryItem, CountryLoader } from "@/components";
 import styles from './CountryList.module.scss';
+import { ICountryItem } from "@/types";
 
 type Props = {
   error:any;
   loading:boolean;
-  countries: ICountryItem[];
   currentItems:ICountryItem[];
 }
 
-export const CountryList = ({error,loading,countries,currentItems}:Props) => {
+export const CountryList = ({error,loading,currentItems}:Props) => {
+
   const renderCountries = () => {
     if (error) {
       return "No matched countries :(";
@@ -20,10 +21,10 @@ export const CountryList = ({error,loading,countries,currentItems}:Props) => {
         .fill(null)
         .map((_, index) => <CountryLoader key={index} />);
     }
-    if (countries.length > 0) {
-      return currentItems.map((country, index) => (
+    if (currentItems.length > 0) {
+      return currentItems.map((country) => (
         <CountryItem
-          key={index}
+          key={country.cca3}
           imageSrc={country.flags.png}
           population={country.population}
           name={country.name.common}

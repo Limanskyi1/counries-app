@@ -6,25 +6,17 @@ import {
   Select,
   CountryList,
 } from "@/components";
-import { ICountryItem } from "@/types";
-import { usePagination ,useAppContext, useThemeContext} from "@/hooks";
-import { itemsPerPage } from "@/context/AppContext";
+import { useAppContext, usePagination} from "@/hooks";
 
 export default function Home() {
-  const {theme} = useThemeContext();
-  console.log(theme);
-  const { error,loading, filteredCountries } =
-    useAppContext();
+  const { error,loading } = useAppContext();
+  const { currentItems,setCurrentPage,currentPage } = usePagination();
 
-  const { currentPage, currentItems, pagesCount, setCurrentPage } =
-    usePagination<ICountryItem>({
-      items: filteredCountries,
-      itemsPerPage,
-    });
   const onPageChange = (page: number) => {
     setCurrentPage(page);
-    window.scrollTo(0,0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
+  
   return (
     <Container>
       <div className="actions">
@@ -34,15 +26,10 @@ export default function Home() {
       <CountryList
         error={error}
         loading={loading}
-        countries={filteredCountries}
         currentItems={currentItems}
       />
       {!error && (
-        <Pagination
-          pagesCount={pagesCount}
-          currentPage={currentPage}
-          onPageChange={onPageChange}
-        />
+        <Pagination onPageChange={onPageChange} currentPage={currentPage}/>
       )}
     </Container>
   );

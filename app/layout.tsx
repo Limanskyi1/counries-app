@@ -7,7 +7,7 @@ import { Providers } from "./providers";
 const inter = Nunito_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Countries App",
+  title: "Countries",
   description: "",
 };
 

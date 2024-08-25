@@ -7,7 +7,6 @@ type Props = {
   }
 };
 
-
 export const Container: FC<Props> = ({ children , styles = {}}) => {
   return <div className="main-container" style={styles}>{children}</div>;
 };

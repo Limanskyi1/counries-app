@@ -1,5 +1,5 @@
 "use client"
-import { ChangeEvent, FC } from 'react';
+import { ChangeEvent, FC, useEffect } from 'react';
 import styles from './InputSearch.module.scss';
 import Image from 'next/image';
 import { useAppContext, useQueryParams, useThemeContext } from '@/hooks';
@@ -7,23 +7,23 @@ import { useAppContext, useQueryParams, useThemeContext } from '@/hooks';
 export const InputSearch:FC = () => {
   const {theme} = useThemeContext();
   const { updateQueryParams } = useQueryParams();
-  const { inputValue, setInputValue } =
-  useAppContext();
+  const { inputValue, setInputValue } = useAppContext();
+  
+  useEffect(() => {
+    if(inputValue){
+      updateQueryParams({ name: inputValue });
+      return
+    } 
+    updateQueryParams({ name: "" });
+  }, [inputValue]);
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setInputValue(newValue);
-    updateQueryParams({ name: newValue });
-    if (newValue.length >= 1) {
-      localStorage.setItem("name", newValue);
-    } else {
-      localStorage.removeItem("name");
-    }
   };
+
   const resetInput = () => {
     setInputValue("");
-    updateQueryParams({ name: "" });
-    localStorage.removeItem("name");
   }
 
   return (

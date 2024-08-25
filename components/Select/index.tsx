@@ -6,32 +6,28 @@ import { useAppContext,useQueryParams ,useOutsideClick, useThemeContext} from "@
 const regions = ["Africa", "America", "Asia", "Europe", "Oceania", "All"];
 
 export const Select:FC = () => {
-  const {theme} = useThemeContext();
+  const { theme } = useThemeContext();
   const { updateQueryParams } = useQueryParams();
   const {selectValue,setSelectValue} = useAppContext();
   const selectRef = useRef(null);
   useOutsideClick(selectRef,() => closeSelect());
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  
   const toggleSelect = () => {
     setIsOpen(!isOpen);
   };
-
   const closeSelect = () => {
     setIsOpen(false);
   }
-
   const onClickRegion = (region: string) => {
     setSelectValue(region);
-    setIsOpen(false); 
+    setIsOpen(false);
+
     if(region === "All"){
       updateQueryParams({region:""})
-      localStorage.removeItem("region");
-    } else {
-      updateQueryParams({region:region})
-      localStorage.setItem("region", region);
-    }
-
+      return
+    } 
+    updateQueryParams({region:region});
   };
 
   return (

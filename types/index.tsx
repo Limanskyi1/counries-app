@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface Currency {
     [key: string]: {
         name: string;
@@ -33,8 +35,17 @@ export interface ICountryItem {
     currencies : Currency
     languages: Languages,
     cca3: string,
-
 }
 
-
-
+export interface IAppContext {
+    countries: ICountryItem[];
+    setCountries: Dispatch<SetStateAction<ICountryItem[]>>;
+    selectValue: string;
+    setSelectValue: Dispatch<SetStateAction<string>>;
+    filteredCountries: ICountryItem[];
+    inputValue: string;
+    setInputValue: Dispatch<SetStateAction<string>>;
+    error: any;
+    loading: boolean;
+  }
+  
