@@ -12,7 +12,7 @@ export const Borders = ({ items }: Props) => {
 
 
   return items.map((item) => (
-    <Link href={`/details/${item}`}>
+    <Link key={item} href={`/details/${item}`}>
       <span className={styles.border}>{item}</span>
     </Link>
   ));
