@@ -1,0 +1,24 @@
+.backBtn {
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 32px;
+    cursor: pointer;
+    span {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 125%;
+      color: var(--title-color);
+    }
+    img{
+      width: 20px;
+      transition: .3s ease-in-out;
+    }
+    &:hover{
+      img{
+        transform: translateX(-5px);
+      }
+    }
+  }
+  

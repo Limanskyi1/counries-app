@@ -1,0 +1,41 @@
+.countryItem {
+  box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.03);
+  background: var(--white);
+  border-radius: 5px;
+  padding-bottom: 46px;
+  transition: .3s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover{
+    transform: scale(1.05);
+  }
+}
+
+.info {
+  padding: 24px;
+  padding-bottom: 0;
+  h4{
+    color: var(--title-color);
+  }
+  & > p {
+    margin-bottom: 8px;
+    font-weight: 300;
+    color: var(--title-color);
+    span {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--title-color);
+    }
+  }
+}
+
+.image {
+  height: 160px;
+  img {
+    object-fit: cover;
+  }
+}
+
+.title {
+  margin-bottom: 16px;
+}

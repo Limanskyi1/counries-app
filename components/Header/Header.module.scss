@@ -1,0 +1,34 @@
+.header{
+    box-shadow: var(--header-shadow);
+    background: var(--header-bg);
+    padding: 24px 0;
+    &[data-theme="dark"]{
+        background: red;
+    }
+}
+
+.wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media (max-width: 414px){
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+.logo{
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--title-color);
+}
+
+.themeToggle{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    p{
+        color: var(--title-color);
+    }
+}

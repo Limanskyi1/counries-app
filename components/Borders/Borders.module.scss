@@ -1,0 +1,16 @@
+.border {
+    display: inline-flex;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    border: 0px solid #979797;
+    border-radius: 2px;
+    padding: 5px 25px;
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--title-color);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
