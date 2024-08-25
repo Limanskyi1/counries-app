@@ -19,8 +19,8 @@ interface AppContextType {
   filteredCountries: ICountryItem[];
   inputValue: string;
   setInputValue: Dispatch<SetStateAction<string>>;
-  error:any;
-  loading:boolean
+  error: any;
+  loading: boolean;
 }
 
 export const AppContext = createContext<AppContextType>({
@@ -31,33 +31,36 @@ export const AppContext = createContext<AppContextType>({
   filteredCountries: [],
   inputValue: "",
   setInputValue: () => {},
-  error:null,
+  error: null,
   loading: false,
 });
 
 type AppProviderProps = {
   children: ReactNode;
 };
- 
+
 export const itemsPerPage = 16;
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const [countries, setCountries] = useState<ICountryItem[]>([]);
-  const [selectValue, setSelectValue] = useState<string>(
-    localStorage.getItem("region") || "Filter by Region"
-  );
+  const [selectValue, setSelectValue] = useState<string>("Filter by Region");
   const [filteredCountries, setFilteredCountries] = useState<ICountryItem[]>(
     []
   );
-  const [inputValue, setInputValue] = useState<string>(
-    localStorage.getItem("name") || ""
-  );
+  const [inputValue, setInputValue] = useState<string>("");
   const [error, setError] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const { setCurrentPage } = usePagination<ICountryItem>({
     items: filteredCountries,
     itemsPerPage,
   });
+
+  useEffect(() => {
+    const region = localStorage.getItem("region") || "Filter by Region";
+    const name = localStorage.getItem("name") || "";
+    setSelectValue(region);
+    setInputValue(name);
+  }, []);
 
   useEffect(() => {
     if (selectValue === "Filter by Region" || selectValue === "All") {
@@ -109,3 +112,4 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     </AppContext.Provider>
   );
 };
+

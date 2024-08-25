@@ -1,3 +1,4 @@
+"use client"
 import { FC, ReactNode, createContext, useEffect, useState } from "react";
 
 interface IThemeProvider {
@@ -5,22 +6,29 @@ interface IThemeProvider {
 }
 interface IThemeContext {
   theme: string;
-  toggleTheme:() => void
+  toggleTheme: () => void;
 }
 type ThemeType = "light" | "dark";
 
 export const ThemeContext = createContext<IThemeContext>({
   theme: "light",
-  toggleTheme:() => {},
+  toggleTheme: () => {},
 });
 
 export const ThemeProvider: FC<IThemeProvider> = ({ children }) => {
-  const [theme, setTheme] = useState<ThemeType>(localStorage.getItem("theme") as ThemeType ||  "light");
+  const [theme, setTheme] = useState<ThemeType>("light");
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme") as ThemeType;
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+  }, []);
 
   useEffect(() => {
     document.querySelector("html")?.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
-  },[theme])
+  }, [theme]);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -28,6 +36,8 @@ export const ThemeProvider: FC<IThemeProvider> = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme ,toggleTheme}}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
   );
 };
